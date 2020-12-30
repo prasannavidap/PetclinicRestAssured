@@ -1,0 +1,17 @@
+xRequest URI:	http://petclinicapi.e46708b92c054086909b.eastus.aksapp.io/petclinic/swagger-ui.html/owner-rest-controller
+Body:
+{"name":"New Service"}
+HTTP/1.1 404 
+ª{"timestamp":"2020-12-17T06:47:01.163+0000","status":404,"error":"Not Found","message":"No message available","path":"/petclinic/swagger-ui.html/owner-rest-controller"}
+xRequest URI:	http://petclinicapi.e46708b92c054086909b.eastus.aksapp.io/petclinic/swagger-ui.html/owner-rest-controller
+Body:			<none>
+HTTP/1.1 404 
+ª{"timestamp":"2020-12-17T06:47:02.091+0000","status":404,"error":"Not Found","message":"No message available","path":"/petclinic/swagger-ui.html/owner-rest-controller"}
+ŒRequest URI:	http://petclinicapi.e46708b92c054086909b.eastus.aksapp.io/petclinic/swagger-ui.html/owner-rest-controller?%24sort%5Bname%5D=1
+Body:			<none>
+HTTP/1.1 404 
+ª{"timestamp":"2020-12-17T06:47:02.625+0000","status":404,"error":"Not Found","message":"No message available","path":"/petclinic/swagger-ui.html/owner-rest-controller"}
+vRequest URI:	http://petclinicapi.e46708b92c054086909b.eastus.aksapp.io/petclinic/swagger-ui.html/pet-rest-controller
+Body:			<none>
+HTTP/1.1 404 
+¨{"timestamp":"2020-12-17T06:47:03.194+0000","status":404,"error":"Not Found","message":"No message available","path":"/petclinic/swagger-ui.html/pet-rest-controller"}
