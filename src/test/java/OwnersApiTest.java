@@ -2,16 +2,15 @@ import api.common.ApiResponse;
 import api.common.exception.InvalidResponseException;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import petclinic.api.owners.data.Owner;
 import petclinic.api.OwnersApiClient;
-import petclinic.api.owners.data.OwnerResponse;
-
-import java.util.List;
+import petclinic.api.owners.data.Owner;
 
 public class OwnersApiTest {
 
     static String apiUrl;
+    private String ownerId;
 
     @BeforeAll
     static void getApiUrl() {
@@ -19,59 +18,89 @@ public class OwnersApiTest {
     }
 
     @Test
-    public void getOwners_checkIdGreaterThanZero() throws InvalidResponseException {
+    public void owners_crud_operations() throws InvalidResponseException, InterruptedException {
+
+        //1. Fetching the details of Owners. Method- GET
+        getOwners_checkFieldsMatches();
+
+        //2. Creating the Owner. Method- POST
+        createOwner_addingDetails();
+    }
+
+
+
+    public void getOwners_checkFieldsMatches() throws InvalidResponseException {
         OwnersApiClient client = new OwnersApiClient(apiUrl);
-        ApiResponse<OwnerResponse> owners = client.getOwners();
+        Owner[] owners = client.getOwners();
 
         SoftAssertions softly = new SoftAssertions();
-        softly.assertThat(owners.getHttpStatusCode().equals(200));
-        //softly.assertThat(owners.contains("city"));
-        //softly.assertThat(owners.equalsIgnoreCase("UP"));
-       // softly.assertThat(owners.equals(" ").
-        //softly.assertThat(services.stream().allMatch(service -> service.getId() > 0)).isTrue();
-        //softly.assertThat(owners.stream().allMatch(owner -> owner.getId() > 0)).isTrue();
+
+        softly.assertThat(owners[0].getFirstName()).isEqualTo("Betty");
+        softly.assertThat(owners[0].getLastName()).isEqualTo("Davis");
+        softly.assertThat(owners[0].getCity()).isEqualTo("Sun Prairie");
         softly.assertAll();
     }
 
-  /* @Test
-    public void createOwner_addingName() throws InvalidResponseException {
+
+    public void createOwner_addingDetails() throws InvalidResponseException {
 
         OwnersApiClient client = new OwnersApiClient(apiUrl);
-        Owner createdOwner = client.createOwner(Owner.builder().firstName("Monica").build());
-
+        Owner createdOwner = client.createOwner(Owner.builder()
+                .firstName("Monica")
+                .lastName("Geller")
+                .address("Central Perk")
+                .city("NYC")
+                .telephone("7896541236").build());
+        ownerId = createdOwner.getId();
         SoftAssertions softly = new SoftAssertions();
-        softly.assertThat(createdOwner.getFirstName().isEqualTo("Monica"));
-        softly.assertAll();
-    }*/
-
-
-    /*@Test
-    public void createService_checkId_ShouldReturnService() throws InvalidResponseException {
-        Date currentDate = new Date();
-        ServicesApiClient client = new ServicesApiClient(apiUrl);
-        Service createdService = client.createService(Service.builder().name("New Service").build());
-
-        SoftAssertions softly = new SoftAssertions();
-        softly.assertThat(createdService.getId()).isGreaterThanOrEqualTo(1);
-        softly.assertThat(createdService.getName()).isEqualTo("New Service");
-        softly.assertThat(createdService.getCreatedAt()).isAfterOrEqualTo(currentDate);
-        softly.assertThat(createdService.getCreatedAt()).isEqualTo(createdService.getUpdatedAt());
+        softly.assertThat(createdOwner.getFirstName()).isEqualTo("Monica");
         softly.assertAll();
     }
 
-    @Test
-    public void getServices_SortByNameAscending_ShouldReturnSortedResults() throws InvalidResponseException {
-        ServicesApiClient client = new ServicesApiClient(apiUrl);
-        List<Service> services = client.getServicesByQuery("$sort[name]=1");
+
+
+
+
+    @Disabled
+    public void getOwner_byId() throws InvalidResponseException{
+
+        OwnersApiClient client=new OwnersApiClient(apiUrl,ownerId);
+
+        Owner getOwner = client.getById();
 
         SoftAssertions softly = new SoftAssertions();
-        softly.assertThat(services.size()).isEqualTo(10);
-        softly.assertThat(services.stream().allMatch(service -> service.getId() > 0)).isTrue();
-        List<String> names = services.stream().map(Service::getName).sorted(Comparator.naturalOrder()).collect(Collectors.toList());
-        ArrayList<String> sortedNames = new ArrayList<>(names);
-        sortedNames.sort(Comparator.naturalOrder());
-        softly.assertThat(names).isEqualTo(sortedNames);
+        softly.assertThat(getOwner.getFirstName()).isEqualTo("Monica");
+        softly.assertThat(getOwner.getLastName()).isEqualTo("Geller");
         softly.assertAll();
-    }*/
+
+
+    }
+
+    @Disabled
+    public void updateOwner_addingDetails() throws InvalidResponseException {
+        OwnersApiClient client = new OwnersApiClient(apiUrl, ownerId);
+        Owner getOwner = client.getById();
+
+        getOwner.setFirstName("Name Updated");
+
+        Owner updateOwner = client.updateById(getOwner);
+        SoftAssertions softly = new SoftAssertions();
+        softly.assertThat(updateOwner.getFirstName()).isEqualTo("Name Updated");
+        softly.assertAll();
+    }
+
+    @Disabled
+    public void deleteOwner_byId(){
+
+        OwnersApiClient client=new OwnersApiClient(apiUrl,ownerId);
+
+        ApiResponse<Owner[]> deleteOwner = client.deleteId();
+
+        SoftAssertions softly = new SoftAssertions();
+        softly.assertThat(deleteOwner.getHttpStatusCode().equals(204));
+        softly.assertAll();
+
+    }
+
 }
 

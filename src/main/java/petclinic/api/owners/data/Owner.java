@@ -3,9 +3,12 @@ package petclinic.api.owners.data;
 import com.google.gson.annotations.Expose;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
+
 import java.util.List;
 @Getter
 @Builder
+@Setter
 public class Owner {
 
 
@@ -15,19 +18,6 @@ public class Owner {
 
     @Expose
     private String firstName;
-
-    @Override
-    public String toString() {
-        return "Owner{" +
-                "id='" + id + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", address='" + address + '\'' +
-                ", city='" + city + '\'' +
-                ", telephone='" + telephone + '\'' +
-                ", pets=" + pets +
-                '}';
-    }
 
     @Expose
     private String lastName;

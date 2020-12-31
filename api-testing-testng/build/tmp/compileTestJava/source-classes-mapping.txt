@@ -1,4 +1,0 @@
-StoresApiTest.java
- StoresApiTest
-ServicesApiTest.java
- ServicesApiTest

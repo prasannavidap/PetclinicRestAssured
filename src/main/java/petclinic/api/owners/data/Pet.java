@@ -28,16 +28,4 @@ public class Pet {
     @Expose
     private List<Visit> visits;
 
-
-    @Override
-    public String toString() {
-        return "Pet[{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", birthDate='" + birthDate + '\'' +
-                ", type=" + type +
-                ", owner=" + owner +
-                ", visits=" + visits +
-                "}]";
-    }
 }

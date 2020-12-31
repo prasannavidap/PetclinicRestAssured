@@ -8,15 +8,6 @@ import lombok.Getter;
 @Builder
 public class Visit {
 
-    @Override
-    public String toString() {
-        return "Visit[{" +
-                "id=" + id +
-                ", date='" + date + '\'' +
-                ", description='" + description + '\'' +
-                ", pet=" + pet +
-                "}]";
-    }
 
     @Expose
     private int id;
