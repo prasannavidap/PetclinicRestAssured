@@ -3,6 +3,7 @@ package petclinic.api.owners.data;
 import com.google.gson.annotations.Expose;
 import lombok.Builder;
 import lombok.Getter;
+
 import java.util.List;
 
 
@@ -11,21 +12,21 @@ import java.util.List;
 public class Pet {
 
     @Expose
-    private int id;
+    private  int id;
 
     @Expose
-    private String name;
+    private  String name;
 
     @Expose
-    private String birthDate;
+    private  String birthDate;
 
     @Expose
-    private Type type;
+    private  Type type;
 
     @Expose
-    private int owner;
+    private  int owner;
 
     @Expose
-    private List<Visit> visits;
+    private  List<Visit> visits;
 
 }

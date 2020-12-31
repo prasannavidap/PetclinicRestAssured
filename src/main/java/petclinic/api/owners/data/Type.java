@@ -9,8 +9,8 @@ import lombok.Getter;
 public class Type {
 
     @Expose
-    private int id;
+    private  int id;
 
     @Expose
-    private String name;
+    private  String name;
 }

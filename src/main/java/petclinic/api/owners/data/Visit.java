@@ -10,14 +10,14 @@ public class Visit {
 
 
     @Expose
-    private int id;
+    private  int id;
 
     @Expose
-    private String date;
+    private  String date;
 
     @Expose
-    private String description;
+    private  String description;
 
     @Expose
-    private int pet;
+    private  int pet;
 }

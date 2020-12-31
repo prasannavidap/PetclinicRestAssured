@@ -10,7 +10,7 @@ public class ApiClient {
     protected Logger Log;
 
     @Getter
-    private final ApiRequest request;
+    private ApiRequest request;
 
     public ApiClient(String baseUrl, String basePath) {
         Log = LoggerFactory.getLogger(this.getClass().getSimpleName());

@@ -23,7 +23,7 @@ public class OwnersApiClient extends ApiClient {
     }
 
     public OwnersApiClient(String baseUrl, String id) {
-        super(baseUrl, "/api/owners/"+id);
+        super(baseUrl, "/api/owners/" + id);
 
         ObjectMapperConfig config = new ObjectMapperConfig(ObjectMapperType.GSON)
                 .gsonObjectMapperFactory((type, s) -> new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create());
@@ -31,12 +31,13 @@ public class OwnersApiClient extends ApiClient {
 
     }
 
-        public Owner[] getOwners() throws  InvalidResponseException{
+    public Owner[] getOwners() throws InvalidResponseException {
 
-            ApiResponse<Owner[]> response = caller.executeRequest(getRequest(), Method.GET, Owner[].class);
-            return response.getContent();
+        ApiResponse<Owner[]> response = caller.executeRequest(getRequest(), Method.GET, Owner[].class);
+        return response.getContent();
 
-        }
+    }
+
     public Owner createOwner(Owner owner) throws InvalidResponseException {
 
         ApiRequest request = getRequest().withBody(owner).withHeader("Content-Type", "application/json");
@@ -46,13 +47,13 @@ public class OwnersApiClient extends ApiClient {
 
     public ApiResponse<Owner[]> deleteId() {
 
-            ApiResponse<Owner[]> response= caller.executeRequest(getRequest(), Method.DELETE, Owner[].class);
-            return response;
+        ApiResponse<Owner[]> response = caller.executeRequest(getRequest(), Method.DELETE, Owner[].class);
+        return response;
     }
 
-    public Owner getById() throws InvalidResponseException{
-        ApiResponse<Owner> response= caller.executeRequest(getRequest(), Method.GET, Owner.class);
-        return response.getContent();
+    public ApiResponse<Owner> getById() throws InvalidResponseException {
+        ApiResponse<Owner> response = caller.executeRequest(getRequest(), Method.GET, Owner.class);
+        return response;
     }
 
     public Owner updateById(Owner getOwner) throws InvalidResponseException {
