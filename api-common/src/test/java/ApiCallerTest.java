@@ -1,3 +1,4 @@
+/*
 import api.common.ApiCaller;
 import api.common.ApiRequest;
 import api.common.ApiResponse;
@@ -54,3 +55,4 @@ public class ApiCallerTest {
         assertThat(apiResponse.getContent().getStatus()).isEqualTo(1);
     }
 }
+*/

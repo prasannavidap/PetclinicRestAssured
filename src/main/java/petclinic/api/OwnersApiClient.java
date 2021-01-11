@@ -11,19 +11,12 @@ import io.restassured.internal.mapping.GsonMapper;
 import io.restassured.mapper.ObjectMapperType;
 import petclinic.api.owners.data.Owner;
 
+
+
 public class OwnersApiClient extends ApiClient {
 
-    public OwnersApiClient(String baseUrl) {
-        super(baseUrl, "/api/owners");
-
-        ObjectMapperConfig config = new ObjectMapperConfig(ObjectMapperType.GSON)
-                .gsonObjectMapperFactory((type, s) -> new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create());
-        setObjectMapper(new GsonMapper(config.gsonObjectMapperFactory()));
-
-    }
-
-    public OwnersApiClient(String baseUrl, String id) {
-        super(baseUrl, "/api/owners/" + id);
+    public OwnersApiClient(String baseUrl, String basePathOwners) {
+        super(baseUrl, basePathOwners);
 
         ObjectMapperConfig config = new ObjectMapperConfig(ObjectMapperType.GSON)
                 .gsonObjectMapperFactory((type, s) -> new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create());
@@ -51,7 +44,8 @@ public class OwnersApiClient extends ApiClient {
         return response;
     }
 
-    public ApiResponse<Owner> getById() throws InvalidResponseException {
+    public ApiResponse<Owner> getById()  {
+
         ApiResponse<Owner> response = caller.executeRequest(getRequest(), Method.GET, Owner.class);
         return response;
     }
@@ -62,4 +56,6 @@ public class OwnersApiClient extends ApiClient {
         ApiResponse<Owner> response = caller.executeRequest(request, Method.PUT, Owner.class);
         return response.getContent();
     }
+
+
 }

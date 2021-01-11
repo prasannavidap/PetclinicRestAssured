@@ -2,6 +2,7 @@ import api.common.ApiResponse;
 import api.common.exception.InvalidResponseException;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import petclinic.api.OwnersApiClient;
 import petclinic.api.owners.data.Owner;
@@ -17,34 +18,11 @@ public class OwnersApiTest {
         apiUrl = System.getProperty("apiUrl");
     }
 
+
     @Test
-    public void owners_crud_operations() throws InvalidResponseException, InterruptedException {
-
-        //1. Fetching the details of Owners. Method- GET
-        getOwners_checkFieldsMatches();
-
-        //2. Creating the Owner. Method- POST
-        createOwner_addingDetails();
-
-        //Using wait to get the details fetched for newly created owner
-        Thread.sleep(4000);
-
-        //3. Fetching owner details by newly created id in 2. Method- GET
-        getOwner_byId();
-
-        Thread.sleep(3000);
-
-        //4.Updating the owner details. Method- PUT
-        updateOwner_addingDetails();
-
-        //5. Deleting the owner details. Method -DELETE
-        deleteOwner_byId();
-    }
-
-
     //Fetching  the details of owner
     public void getOwners_checkFieldsMatches() throws InvalidResponseException {
-        OwnersApiClient client = new OwnersApiClient(apiUrl);
+        OwnersApiClient client = new OwnersApiClient(apiUrl,"/api/owners/");
         Owner[] owners = client.getOwners();
 
         softly.assertThat(owners[0].getFirstName()).isEqualTo("Betty");
@@ -55,10 +33,11 @@ public class OwnersApiTest {
         softly.assertAll();
     }
 
+    @Test
     //Creating the owner
     public void createOwner_addingDetails() throws InvalidResponseException {
 
-        OwnersApiClient client = new OwnersApiClient(apiUrl);
+        OwnersApiClient client = new OwnersApiClient(apiUrl,"/api/owners/");
         Owner createdOwner = client.createOwner(Owner.builder()
                 .firstName("Monica")
                 .lastName("Geller")
@@ -73,45 +52,66 @@ public class OwnersApiTest {
         softly.assertAll();
     }
 
+    @Test
     //Fetching owner details by the newly created owner id
     public void getOwner_byId() throws InvalidResponseException {
 
-        OwnersApiClient client = new OwnersApiClient(apiUrl, ownerId);
+        OwnersApiClient client = new OwnersApiClient(apiUrl,"/api/owners/");
+        Owner createdOwner = client.createOwner(Owner.builder()
+                .firstName("Monica")
+                .lastName("Geller")
+                .address("Central Perk")
+                .city("NYC")
+                .telephone("7896541236").build());
+        ownerId = createdOwner.getId();
 
-        Owner getOwner = client.getById().getContent();
+       OwnersApiClient clientRequest = new OwnersApiClient(apiUrl,"/api/owners/"+ownerId);
+        Owner getOwner = clientRequest.getById().getContent();
 
         softly.assertThat(getOwner.getFirstName()).isEqualTo("Monica");
         softly.assertThat(getOwner.getLastName()).isEqualTo("Geller");
         softly.assertAll();
 
-
     }
-
+   @Test
+   @Disabled
     //Updating owner details by fetched owner details.
     public void updateOwner_addingDetails() throws InvalidResponseException {
-        OwnersApiClient client = new OwnersApiClient(apiUrl, ownerId);
-        Owner getOwner = client.getById().getContent();
+        OwnersApiClient client = new OwnersApiClient(apiUrl,"/api/owners/");
+        Owner createdOwner = client.createOwner(Owner.builder()
+                .firstName("Monica")
+                .lastName("Geller")
+                .address("Central Perk")
+                .city("NYC")
+                .telephone("7896541236").build());
+        ownerId = createdOwner.getId();
 
-        getOwner.setFirstName("Joey");
-
-        Owner updateOwner = client.updateById(getOwner);
-
+        OwnersApiClient clientRequest = new OwnersApiClient(apiUrl,"/api/owners/"+ownerId);
+       Owner getOwner = clientRequest.getById().getContent();
+       getOwner.setFirstName("Joey");
+       Owner updateOwner = clientRequest.updateById(getOwner);
         softly.assertThat(updateOwner.getFirstName()).isEqualTo("Joey");
         softly.assertAll();
     }
-
+    @Test
     //Deleting the owner details for the updated owner.
     public void deleteOwner_byId() throws InvalidResponseException {
 
-        OwnersApiClient client = new OwnersApiClient(apiUrl, ownerId);
+        OwnersApiClient client = new OwnersApiClient(apiUrl,"/api/owners/");
+        Owner createdOwner = client.createOwner(Owner.builder()
+                .firstName("Monica")
+                .lastName("Geller")
+                .address("Central Perk")
+                .city("NYC")
+                .telephone("7896541236").build());
+        ownerId = createdOwner.getId();
 
-        ApiResponse<Owner[]> deleteOwner = client.deleteId();
+        OwnersApiClient clientRequest = new OwnersApiClient(apiUrl,"/api/owners/"+ownerId);
 
-        ApiResponse<Owner> getOwner = client.getById();
+        ApiResponse<Owner[]> deleteOwner = clientRequest.deleteId();
 
         SoftAssertions softly = new SoftAssertions();
         softly.assertThat(deleteOwner.getHttpStatusCode().equals(204));
-        softly.assertThat(getOwner.getHttpStatusCode().equals(404));
         softly.assertAll();
 
     }

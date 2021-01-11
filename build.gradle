@@ -30,6 +30,7 @@ dependencies {
 
 test {
     systemProperty 'apiUrl', apiUrl
+
     reports.junitXml.outputPerTestCase = true
 
     useJUnitPlatform(){

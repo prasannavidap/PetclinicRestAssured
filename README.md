@@ -1,10 +1,5 @@
-pre-requisites - download code and do setup from https://github.com/BestBuy/api-playground
+pre-requisites - download code and do setup from  https://github.com/prasannavidap/PetclinicRestAssured/tree/master
 
-Project has 2 sub-modules 
-
-1) api-common - common code that all ApiClient classes can inherit from
-2) api-testing-testng - copy of the tests under the main project "api-testing-poc" - this can be ignored for the moment
-I'm using Java 15 but Java 11 should be fine.
 
 You will need Lombok plug-in installed and configured on Eclipse /IntelliJ
 
