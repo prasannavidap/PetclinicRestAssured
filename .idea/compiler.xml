@@ -14,9 +14,6 @@
         <module name="api-testing-poc.api-common.test" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="1.8">
-      <module name="api-testing-poc.api-testing-testng.main" target="11" />
-      <module name="api-testing-poc.api-testing-testng.test" target="11" />
-    </bytecodeTargetLevel>
+    <bytecodeTargetLevel target="1.8" />
   </component>
 </project>

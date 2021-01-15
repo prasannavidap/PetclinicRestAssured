@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="OnlineShopTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2021-01-15T05:42:46" hostname="DESKTOP-CJDRQHQ" time="9.915">
+  <properties/>
+  <testcase name="getOrdersSummary_fromCart()" classname="OnlineShopTest" time="5.71">
+    <system-out><![CDATA[11:12:47.718 - [OnlineShopClient] INFO  : Initiated com.petclinic.api.OnlineShopClient instance
+11:12:47.943 - [ApiCaller] INFO  : Request:
+Request URI:	http://petclinicapi.e46708b92c054086909b.eastus.aksapp.io/petclinic/api/shop/addtocart
+Body:
+{"amount":500.0,"currency":"$","id":4,"name":"Velcote Liquid","quantity":0}
+11:12:50.219 - [ApiCaller] INFO  : Response:
+HTTP/1.1 200 
+{"id":4,"name":"Velcote Liquid","amount":500.0,"quantity":1,"currency":"$"}
+11:12:50.276 - [OnlineShopClient] INFO  : Initiated com.petclinic.api.OnlineShopClient instance
+11:12:50.277 - [ApiCaller] INFO  : Request:
+Request URI:	http://petclinicapi.e46708b92c054086909b.eastus.aksapp.io/petclinic/api/shop/ordersummary
+Body:			<none>
+11:12:50.980 - [ApiCaller] INFO  : Response:
+HTTP/1.1 200 
+{"cart":[{"id":1,"name":"Digestive Care- Cat Food","amount":500.00,"quantity":1,"currency":"$"},{"id":4,"name":"Velcote Liquid","amount":500.00,"quantity":1,"currency":"$"}],"totalAmount":1000.00}
+]]></system-out>
+    <system-err><![CDATA[]]></system-err>
+  </testcase>
+  <testcase name="deleteCart()" classname="OnlineShopTest" time="1.849">
+    <system-out><![CDATA[11:12:52.529 - [OnlineShopClient] INFO  : Initiated com.petclinic.api.OnlineShopClient instance
+11:12:52.531 - [ApiCaller] INFO  : Request:
+Request URI:	http://petclinicapi.e46708b92c054086909b.eastus.aksapp.io/petclinic/api/shop/addtocart
+Body:
+{"amount":50.0,"currency":"$","id":4,"name":"Velcote Liquid","quantity":0}
+11:12:53.400 - [ApiCaller] INFO  : Response:
+HTTP/1.1 200 
+{"id":4,"name":"Velcote Liquid","amount":500.00,"quantity":2,"currency":"$"}
+11:12:53.404 - [OnlineShopClient] INFO  : Initiated com.petclinic.api.OnlineShopClient instance
+11:12:53.404 - [ApiCaller] INFO  : Request:
+Request URI:	http://petclinicapi.e46708b92c054086909b.eastus.aksapp.io/petclinic/api/shop/clearcart
+Body:			<none>
+11:12:54.133 - [ApiCaller] INFO  : Response:
+HTTP/1.1 200 
+Cart empty.
+]]></system-out>
+    <system-err><![CDATA[]]></system-err>
+  </testcase>
+  <testcase name="getProducts_fromShopOnline()" classname="OnlineShopTest" time="1.209">
+    <system-out><![CDATA[11:12:54.370 - [OnlineShopClient] INFO  : Initiated com.petclinic.api.OnlineShopClient instance
+11:12:54.370 - [ApiCaller] INFO  : Request:
+Request URI:	http://petclinicapi.e46708b92c054086909b.eastus.aksapp.io/petclinic/api/shop/getproducts
+Body:			<none>
+11:12:55.119 - [ApiCaller] INFO  : Response:
+HTTP/1.1 200 
+[{"id":1,"name":"Kennel Kitchen","amount":635.00,"currency":"$"},{"id":2,"name":"Velcote Liquid","amount":318.00,"currency":"$"},{"id":3,"name":"Pedigree PRO","amount":923.00,"currency":"$"},{"id":4,"name":"Velcote Premium","amount":318.00,"currency":"$"},{"id":5,"name":"Mantra Kismis","amount":63.00,"currency":"$"},{"id":6,"name":"Haldiram Noodles","amount":320.00,"currency":"$"},{"id":7,"name":"Bingo Mad Angles ","amount":912.00,"currency":"$"},{"id":8,"name":"Bikani Rasogolla","amount":318.00,"currency":"$"}]
+]]></system-out>
+    <system-err><![CDATA[]]></system-err>
+  </testcase>
+  <testcase name="createOrder_addingItems()" classname="OnlineShopTest" time="1.135">
+    <system-out><![CDATA[11:12:55.586 - [OnlineShopClient] INFO  : Initiated com.petclinic.api.OnlineShopClient instance
+11:12:55.586 - [ApiCaller] INFO  : Request:
+Request URI:	http://petclinicapi.e46708b92c054086909b.eastus.aksapp.io/petclinic/api/shop/addtocart
+Body:
+{"amount":500.0,"currency":"$","id":4,"name":"Velcote Liquid","quantity":0}
+11:12:56.703 - [ApiCaller] INFO  : Response:
+HTTP/1.1 200 
+{"id":4,"name":"Velcote Liquid","amount":500.0,"quantity":1,"currency":"$"}
+]]></system-out>
+    <system-err><![CDATA[]]></system-err>
+  </testcase>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
