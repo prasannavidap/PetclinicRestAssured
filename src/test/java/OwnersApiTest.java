@@ -72,27 +72,7 @@ public class OwnersApiTest {
         softly.assertThat(getOwner.getLastName()).isEqualTo("Geller");
         softly.assertAll();
 
-    }
-   @Test
-   @Disabled
-    //Updating owner details by fetched owner details.
-    public void updateOwner_addingDetails() throws InvalidResponseException {
-        OwnersApiClient client = new OwnersApiClient(apiUrl,"/api/owners/");
-        Owner createdOwner = client.createOwner(Owner.builder()
-                .firstName("Monica")
-                .lastName("Geller")
-                .address("Central Perk")
-                .city("NYC")
-                .telephone("7896541236").build());
-        ownerId = createdOwner.getId();
-
-        OwnersApiClient clientRequest = new OwnersApiClient(apiUrl,"/api/owners/"+ownerId);
-       Owner getOwner = clientRequest.getById().getContent();
-       getOwner.setFirstName("Joey");
-       Owner updateOwner = clientRequest.updateById(getOwner);
-        softly.assertThat(updateOwner.getFirstName()).isEqualTo("Joey");
-        softly.assertAll();
-    }
+    }   
     @Test
     //Deleting the owner details for the updated owner.
     public void deleteOwner_byId() throws InvalidResponseException {
