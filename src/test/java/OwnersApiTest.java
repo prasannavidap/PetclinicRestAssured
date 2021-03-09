@@ -19,7 +19,7 @@ public class OwnersApiTest {
     }
 
 
-    @Test
+    /*@Test
     //Fetching  the details of owner
     public void getOwners_checkFieldsMatches() throws InvalidResponseException {
         OwnersApiClient client = new OwnersApiClient(apiUrl,"/api/owners/");
@@ -31,7 +31,7 @@ public class OwnersApiTest {
         softly.assertThat(owners[0].getId()).isGreaterThan("0");
         softly.assertThat(owners[0].getAddress()).isNotEmpty();
         softly.assertAll();
-    }
+    }*/
 
     @Test
     //Creating the owner
